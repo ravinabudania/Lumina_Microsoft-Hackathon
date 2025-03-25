@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareerDisha: Your AI Career Navigator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #87CEFA, #4682B4, #1E3A5F);
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            position: absolute;
+            left: 30px;
+            top: 10px;
+            width: 100px;
+            height: auto;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: white;
+            text-align: center;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 800px;
+            width: 100%;
+            margin: 20px 0;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            color: #002244;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            color: #003366;
+            margin: 20px 0 10px;
+            text-align: left;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            color: #004080;
+            margin: 15px 0 8px;
+            text-align: left;
+        }
+
+        h4 {
+            font-size: 1.2rem;
+            color: #0056b3;
+            margin-bottom: 10px;
+        }
+
+        .input-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .input-container input {
+            width: 48%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            font-size: 1rem;
+            background: #f8f9fa;
+            transition: 0.3s ease;
+        }
+
+        .input-container input::placeholder {
+            color: #888;
+        }
+
+        .input-container input:focus {
+            border-color: #0056b3;
+            background: #fff;
+        }
+
+        .upload-box {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+            margin: 15px 0;
+            border-radius: 8px;
+            background: #f8f9fa;
+        }
+
+        .submit-btn {
+            background: #0056b3;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover {
+            background: #003f7f;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #0056b3;
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .skills-container {
+            background: #e9f5ff;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: #0056b3;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            margin: 5px;
+            font-size: 0.9rem;
+        }
+
+        .upload-status {
+            color: #28a745;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        .ai-recommendation {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+            border-left: 4px solid #0056b3;
+        }
+
+        .recommendation-content h3 {
+            color: #0056b3;
+            margin: 15px 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .recommendation-content p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .recommendation-content ul {
+            margin: 10px 0 15px 20px;
+        }
+
+        .recommendation-content li {
+            margin-bottom: 8px;
+        }
+
+        .recommendation-content strong {
+            color: #003366;
+            font-weight: 600;
+        }
+
+        .recommendation-content u {
+            text-decoration: none;
+            border-bottom: 2px solid #ff6b6b;
+            padding-bottom: 1px;
+        }
+
+        .recommendation-content .highlight-box {
+            background-color: #f0f7ff;
+            border-left: 3px solid #0056b3;
+            padding: 12px;
+            margin: 15px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .output-box {
+            max-height: 500px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            margin-top: 20px;
+            background: #f0f8ff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .details-link {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 15px;
+            background-color: #0056b3;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .details-link:hover {
+            background-color: #003f7f;
+        }
+
+        .recommendation-summary {
+            font-weight: 600;
+            color: #0056b3;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .input-container input {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .header h1 {
+                font-size: 1.8rem;
+                margin-left: 60px;
+            }
+
+            .header img {
+                width: 50px;
+                left: 15px;
+                top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="../static/pic.png" alt="CareerDisha Logo">
+        <h1>CareerDisha👩‍💻: Your AI Career Advisor</h1>
+    </div>
+
+    <div class="container">
+        <form action="/" method="post" enctype="multipart/form-data">
+            <div class="input-container">
+                <input type="text" id="name" name="name" placeholder="Your Name" required value="{{ form_data.name }}">
+                <input type="text" id="interests" name="interests" placeholder="Interests" required value="{{ form_data.interests }}">
+            </div>
+            
+            <div class="input-container">
+                <input type="text" id="skills" name="skills" placeholder="Skills (comma separated)" required value="{{ form_data.skills }}">
+                <input type="text" id="degree" name="degree" placeholder="Degree" required value="{{ form_data.degree }}">
+            </div>
+
+            <div class="input-container">
+                <input type="text" id="working" name="working" placeholder="Current Employment Status" required value="{{ form_data.working }}">
+                <input type="text" id="specialization" name="specialization" placeholder="Specialization" required value="{{ form_data.specialization }}">
+            </div>
+
+            <div class="input-container">
+                <input type="text" id="percentage" name="percentage" placeholder="Percentage/CGPA" required value="{{ form_data.percentage }}">
+                <input type="text" id="certifications" name="certifications" placeholder="Certifications" required value="{{ form_data.certifications }}">
+            </div>
+
+            <div class="upload-box">
+                <h4>Upload Your Resume (Optional)</h4>
+                <input type="file" name="resume" accept=".pdf">
+                <p>PDF format only (Max 5MB)</p>
+                {% if resume_uploaded %}
+                <p class="upload-status">✓ Resume uploaded successfully</p>
+                {% endif %}
+            </div>
+
+            <input class="submit-btn" type="submit" value="Get Career Recommendations ➡️">
+        </form>
+
+        {% if jobs %}
+        <div class="output-box">
+            <h2>Hello Enthusiast🚀! Based on your skills, interests, and expertise, these career paths align perfectly with your potential!</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Job Title</th>
+                        <th>Company</th>
+                        <th>Location</th>
+                        <th>Match Score</th>
+                        <th>Rating</th>
+                        <th>Salary</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for job in jobs %}
+                    <tr>
+                        <td>{{ job['Job Title'] }}</td>
+                        <td>{{ job['Company'] }}</td>
+                        <td>{{ job['Location'] }}</td>
+                        <td>{{ job['Match Score'] }}/10</td>
+                        <td>{{ job['Rating'] }}</td>
+                        <td>${{ "{:,}".format(job['Salary']) if job['Salary'] is number else job['Salary'] }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% endif %}
+
+        {% if skills %}
+        <div class="skills-container">
+            <h4>Detected Skills:</h4>
+            {% for skill in skills %}
+                <span class="skill-tag">{{ skill }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if ai_recommendation %}
+        <div class="ai-recommendation">
+            <h2>Personalized Career Advice</h2>
+            <div class="recommendation-content">
+                <p class="recommendation-summary">Based on your profile, we've prepared a detailed career analysis.</p>
+                <a href="/details?name={{ form_data.name|urlencode }}&skills={{ form_data.skills|urlencode }}&degree={{ form_data.degree|urlencode }}&interests={{ form_data.interests|urlencode }}" 
+                   class="details-link">
+                    View Full Career Analysis Report
+                </a>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
