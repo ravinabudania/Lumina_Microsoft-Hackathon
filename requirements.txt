@@ -1,0 +1,7 @@
+flask 
+gradientai
+pandas 
+python-dotenv 
+openai 
+werkzeug
+PyPDF2
