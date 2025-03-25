@@ -10,14 +10,17 @@ CareerDisha is an AI-powered career recommendation system that helps users find 
 - **Interactive UI** – Simple and user-friendly interface.
 
 ## Installation ⚡
-1. Clone the repository:
+1. Set up your virtual environment, and then install the required packages from requiremnets.txt file using the command:
+   ```bash
+   pip install -r requiremenets.txt
+2. Clone the repository:
    ```bash
    git clone https://github.com/yourusername/CareerDisha.git
    cd CareerDisha
-2. Install dependencies:
+3. Install dependencies:
    ```bash
    pip install flask pandas openai werkzeug
-3. 3️⃣ Set environment variables (Optional but recommended):
+4. 3️⃣ Set environment variables (Optional but recommended):
    ```bash
    export ENDPOINT_URL="your_azure_openai_endpoint"
    export DEPLOYMENT_NAME="gpt-4"
