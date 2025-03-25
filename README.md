@@ -41,6 +41,11 @@ CareerDisha helps job seekers and students find the best career paths based on t
 
 CareerDisha bridges the gap between job seekers and recruiters, making career planning more effective.  
 
-static/pic.png
+## Screenshots
+
+### Home Page
+![Home Page](static/pic.png)
+
+
 
 
