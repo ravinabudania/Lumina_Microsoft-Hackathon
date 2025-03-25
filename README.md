@@ -20,7 +20,7 @@ CareerDisha is an AI-powered career recommendation system that helps users find 
 3. Set environment variables (Optional but recommended):
    ```bash
    export ENDPOINT_URL="your_azure_openai_endpoint"
-   export DEPLOYMENT_NAME="gpt-4"
+   export DEPLOYMENT_NAME="your_deployment_name"
    export AZURE_OPENAI_API_KEY="your_api_key"
 4. Run the application:
    ```bash
