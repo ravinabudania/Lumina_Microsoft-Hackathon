@@ -268,6 +268,76 @@
             margin-bottom: 15px;
         }
 
+        /* Q&A Section Styles */
+        .qa-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            text-align: left;
+            border-left: 4px solid #0056b3;
+        }
+
+        .qa-container h2 {
+            color: #0056b3;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .qa-input-group {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .qa-input-group input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px 0 0 8px;
+            outline: none;
+            font-size: 1rem;
+        }
+
+        .qa-input-group button {
+            padding: 12px 20px;
+            background: #0056b3;
+            color: white;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .qa-input-group button:hover {
+            background: #003f7f;
+        }
+
+        .qa-answer-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 15px;
+            display: none;
+        }
+
+        .qa-answer-header {
+            background: #0056b3;
+            color: white;
+            padding: 12px 15px;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .qa-answer-body {
+            padding: 15px;
+        }
+
+        .qa-loading {
+            display: none;
+            text-align: center;
+            padding: 10px;
+            color: #0056b3;
+        }
+
         @media (max-width: 768px) {
             .input-container input {
                 width: 100%;
@@ -293,6 +363,20 @@
                 width: 50px;
                 left: 15px;
                 top: 15px;
+            }
+
+            .qa-input-group {
+                flex-direction: column;
+            }
+
+            .qa-input-group input {
+                border-radius: 8px;
+                margin-bottom: 10px;
+            }
+
+            .qa-input-group button {
+                border-radius: 8px;
+                width: 100%;
             }
         }
     </style>
@@ -388,6 +472,78 @@
             </div>
         </div>
         {% endif %}
+
+        <!-- Q&A Section -->
+        <div class="qa-container">
+            <h2>Ask CareerDisha Anything</h2>
+            <p>Have questions about careers, skills, or job searching? Ask our AI career advisor!</p>
+            
+            <div class="qa-input-group">
+                <input type="text" id="questionInput" placeholder="Ask any career-related question...">
+                <button onclick="askQuestion()">Ask</button>
+            </div>
+            
+            <div id="qaLoading" class="qa-loading">
+                <p>Thinking...</p>
+            </div>
+            
+            <div id="qaAnswerCard" class="qa-answer-card">
+                <div class="qa-answer-header">
+                    <strong>Question:</strong> <span id="qaQuestionDisplay"></span>
+                </div>
+                <div class="qa-answer-body">
+                    <p id="qaAnswerDisplay"></p>
+                </div>
+            </div>
+        </div>
     </div>
+
+    <script>
+        // Q&A Functionality
+        function askQuestion() {
+            const question = document.getElementById('questionInput').value.trim();
+            if (!question) {
+                alert('Please enter a question');
+                return;
+            }
+
+            // Show loading state
+            document.getElementById('qaQuestionDisplay').textContent = question;
+            document.getElementById('qaAnswerDisplay').textContent = '';
+            document.getElementById('qaLoading').style.display = 'block';
+            document.getElementById('qaAnswerCard').style.display = 'none';
+
+            fetch('/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ question: question })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('qaLoading').style.display = 'none';
+                if (data.error) {
+                    document.getElementById('qaAnswerDisplay').textContent = data.error;
+                } else {
+                    document.getElementById('qaAnswerDisplay').textContent = data.answer;
+                }
+                document.getElementById('qaAnswerCard').style.display = 'block';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('qaLoading').style.display = 'none';
+                document.getElementById('qaAnswerDisplay').textContent = 'Sorry, an error occurred. Please try again.';
+                document.getElementById('qaAnswerCard').style.display = 'block';
+            });
+        }
+
+        // Allow pressing Enter to submit question
+        document.getElementById('questionInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                askQuestion();
+            }
+        });
+    </script>
 </body>
 </html>
