@@ -44,9 +44,9 @@ CareerDisha bridges the gap between job seekers and recruiters, making career pl
 ## Screenshots
 ### Home Page
 ![Career Analysis](static/pic2.png)
-![Career Analysis](static/pic6.jpg)
 ### Career Analysis Report
 ![Career Analysis](static/pic3.png)
+![Career Analysis](static/pic6.jpg)
 ### Career Analysis Full Report
 ![Career Analysis](static/pic4.png)
 ![Career Analysis](static/pic5.jpg)
